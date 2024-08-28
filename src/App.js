@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import { useSelector } from 'react-redux';
 import './App.css';
+import PostList from './components/posts/PostList';
+import PostForm from './components/posts/PostForm';
+import Login from './components/Login';
 
 function App() {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>My Blog</h1>
+      {isAuthenticated ? (
+        <>
+          <PostList />
+          <PostForm />
+        </>
+      ) : (
+        <Login />
+      )}
     </div>
   );
 }
